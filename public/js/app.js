@@ -53,8 +53,49 @@ function signIn() {
   }
 }
 
+function nameFormating(name = "") {
+  let scndName = name.trim();
+  scndName = scndName.charAt(0).toUpperCase() + scndName.slice(1).toLowerCase();
+
+  if (scndName.includes(" ")) {
+    let newName = "";
+    let splitArr = scndName.split(" ");
+    splitArr.forEach((ele) => {
+      newName += ele.charAt(0).toUpperCase() + ele.slice(1).toLowerCase() + " ";
+    });
+    scndName = newName.trim();
+  }
+
+  return scndName;
+}
+
+function nameCheck(name) {
+  let arrName = name.split(" ");
+
+  let newName = "";
+
+  arrName.forEach((ele) => {
+    newName += ele;
+  });
+
+  const nameRegex = /^[a-zA-Z]+$/i;
+
+  if (newName.length < 5 || !nameRegex.test(newName)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function signUp() {
   let fullName = prompt("Enter Your Full Name");
+  fullName = nameFormating(fullName);
+
+  while (nameCheck(fullName)) {
+    fullName = prompt("Reenter Your Full Name");
+    fullName = nameFormating(fullName);
+  }
+
   let email = prompt("Enter Your email");
   let age = prompt("Enter Your age");
   let password = prompt("Enter Your password");
@@ -67,6 +108,8 @@ function signUp() {
 
     database.push(user);
   }
+
+  console.log(database);
 }
 
 function changePassword() {
