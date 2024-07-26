@@ -143,6 +143,31 @@ function ageCheck(age) {
   return true;
 }
 
+// ^ Password check
+
+function passwordCheck(password) {
+  let scndPassword = password.trim();
+
+  if (scndPassword.includes(" ")) {
+    console.log("The password includes a space");
+    return false;
+  }
+
+  let characters = ["@", "#", "-", "+", "*", "/"];
+
+  for (let i = 0; i < characters.length; i++) {
+    if (scndPassword.includes(characters[i])) {
+      return true;
+    }
+  }
+
+  if (scndPassword.length < 7) {
+    return false;
+  }
+
+  return true;
+}
+
 function signUp() {
   let fullName = prompt("Enter Your Full Name");
   fullName = nameFormating(fullName);
@@ -165,6 +190,11 @@ function signUp() {
   }
 
   let password = prompt("Enter Your password");
+
+  while (!passwordCheck(password)) {
+    password = prompt("Reenter Your password");
+  }
+
   let confirmPassword = prompt("Confirm Your password");
 
   if (password != confirmPassword) {
