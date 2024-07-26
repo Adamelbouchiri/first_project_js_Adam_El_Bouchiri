@@ -8,10 +8,7 @@ class User {
   }
 }
 
-let user1 = new User("Adam El Bouchiri", "aaaa@gm.com", 20, "1234", 2000);
-let user2 = new User("Salim Chaachaa", "ssss@gm.com", 20, "1234", 2000);
-
-let database = [user1, user2];
+let database = [];
 
 let chooseEnter = prompt(
   "choose a number [1]sign-in, [2]sign-up, [3]change password, [4]exit"
@@ -53,6 +50,8 @@ function signIn() {
   }
 }
 
+// ^ Name Check
+
 function nameFormating(name = "") {
   let scndName = name.trim();
   scndName = scndName.charAt(0).toUpperCase() + scndName.slice(1).toLowerCase();
@@ -87,6 +86,39 @@ function nameCheck(name) {
   }
 }
 
+// ^ Email check
+
+function emailCheck(email) {
+  let scndEmail = email.trim();
+  scndEmail.toLowerCase();
+
+  if (scndEmail.includes(" ")) {
+    console.log("The email include a space");
+    return false;
+  }
+
+  if (scndEmail.length < 10) {
+    console.log("The email length is lower than 10");
+    return false;
+  }
+
+  let regular = /^[^\s@]+@[^\s@]+$/;
+
+  if (!regular.test(scndEmail)) {
+    console.log("wrong email format");
+    return false;
+  }
+
+  database.forEach((ele) => {
+    if (ele.email === email) {
+      console.log("Email Already in use");
+      return false;
+    }
+  });
+
+  return true;
+}
+
 function signUp() {
   let fullName = prompt("Enter Your Full Name");
   fullName = nameFormating(fullName);
@@ -97,6 +129,11 @@ function signUp() {
   }
 
   let email = prompt("Enter Your email");
+
+  while (!emailCheck(email)) {
+    email = prompt("Enter Your email");
+  }
+
   let age = prompt("Enter Your age");
   let password = prompt("Enter Your password");
   let confirmPassword = prompt("Confirm Your password");
