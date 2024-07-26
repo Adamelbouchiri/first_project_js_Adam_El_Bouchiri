@@ -119,6 +119,30 @@ function emailCheck(email) {
   return true;
 }
 
+// ^ Age check
+
+function ageCheck(age) {
+  let scndAge = age.trim();
+  if (scndAge.includes(" ")) {
+    console.log("The Age Includes a space");
+    return false;
+  }
+
+  let regular = /^\d+$/;
+
+  if (!regular.test(scndAge)) {
+    console.log("You need to enter numbers only");
+    return false;
+  }
+
+  if (scndAge.length < 2 || scndAge.length > 2) {
+    console.log("Enter a resonable Number");
+    return false;
+  }
+
+  return true;
+}
+
 function signUp() {
   let fullName = prompt("Enter Your Full Name");
   fullName = nameFormating(fullName);
@@ -131,10 +155,15 @@ function signUp() {
   let email = prompt("Enter Your email");
 
   while (!emailCheck(email)) {
-    email = prompt("Enter Your email");
+    email = prompt("Reenter Your email");
   }
 
   let age = prompt("Enter Your age");
+
+  while (!ageCheck(age)) {
+    age = prompt("Reenter Your age");
+  }
+
   let password = prompt("Enter Your password");
   let confirmPassword = prompt("Confirm Your password");
 
