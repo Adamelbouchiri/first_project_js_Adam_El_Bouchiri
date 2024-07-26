@@ -39,17 +39,31 @@ function signIn() {
   database.forEach((e) => {
     if (e.email == email && e.password == password) {
       console.log("Loged in Successfully");
-      isFound = false
+      isFound = false;
     }
   });
 
-  if(isFound) {
+  if (isFound) {
     console.log("Information dont match our records");
   }
 }
 
 function signUp() {
-  console.log("sign-up will be here");
+  let fullName = prompt("Enter Your Full Name");
+  let email = prompt("Enter Your email");
+  let age = prompt("Enter Your age");
+  let password = prompt("Enter Your password");
+  let confirmPassword = prompt("Confirm Your password");
+
+  if (password != confirmPassword) {
+    console.log("You've been blocked at the momment refresh to start over");
+  } else {
+    let user = new User(fullName, email, age, password, 0);
+
+    database.push(user);
+
+    console.log(database);
+  }
 }
 
 function changePassword() {
@@ -57,4 +71,3 @@ function changePassword() {
 }
 
 startPrograme();
-
