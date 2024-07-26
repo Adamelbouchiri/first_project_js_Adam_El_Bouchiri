@@ -28,6 +28,11 @@ function startPrograme() {
     case "3":
       changePassword();
       break;
+    case "4":
+      console.log("you've exited the programme");
+      break;
+    default:
+      console.log("refresh and enter one of the following numbers");
   }
 }
 
@@ -61,13 +66,25 @@ function signUp() {
     let user = new User(fullName, email, age, password, 0);
 
     database.push(user);
-
-    console.log(database);
   }
 }
 
 function changePassword() {
-  console.log("change Password will be here");
+  let email = prompt("Enter Your email");
+  let password = prompt("Enter Your password");
+  let isFound = false;
+
+  database.forEach((e) => {
+    if (e.email == email && e.password == password) {
+      let newPassword = prompt("Enter the new password");
+      e.password = newPassword;
+      isFound = true;
+    }
+  });
+
+  if (!isFound) {
+    console.log("No match email or password");
+  }
 }
 
 startPrograme();
