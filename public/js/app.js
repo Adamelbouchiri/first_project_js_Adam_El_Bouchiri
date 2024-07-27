@@ -8,22 +8,23 @@ class User {
   }
 }
 
+let user = new User("", "", "0", "", 0);
+
 let database = [];
 
-let chooseEnter = prompt(
-  "choose a number [1]sign-in, [2]sign-up, [3]change password, [4]exit"
-);
-
-function startPrograme() {
-  switch (chooseEnter) {
+function chooseAProccess(choose) {
+  switch (choose) {
     case "1":
       signIn();
+      showSignInMenu();
       break;
     case "2":
       signUp();
+      startPrograme();
       break;
     case "3":
       changePassword();
+      startPrograme();
       break;
     case "4":
       console.log("you've exited the programme");
@@ -39,9 +40,14 @@ function signIn() {
   let isFound = true;
 
   database.forEach((e) => {
-    if (e.email == email && e.password == password) {
-      console.log("Loged in Successfully");
-      isFound = false;
+    if (e.email == email) {
+      database.forEach((e) => {
+        if (e.email == email && e.password == password) {
+          console.log("Loged in Successfully");
+          isFound = false;
+          user = e;
+        }
+      });
     }
   });
 
@@ -224,6 +230,69 @@ function changePassword() {
   if (!isFound) {
     console.log("No match email or password");
   }
+}
+
+// ^ sign in proccess
+
+function withdraw() {
+  console.log("withdraw will be here");
+}
+
+function deposit() {
+  console.log("deposit will be here");
+}
+
+function takeALoan() {
+  console.log("Loan will be here");
+}
+
+function invest() {
+  console.log("Invest will be here");
+}
+
+function transactionHestory() {
+  console.log("Transaction Hestory will be here");
+}
+
+function chooseASignInProccess(choose) {
+  switch (choose) {
+    case "1":
+      startPrograme();
+      break;
+    case "2":
+      withdraw();
+      break;
+    case "3":
+      deposit();
+      break;
+    case "4":
+      takeALoan();
+      break;
+    case "5":
+      invest();
+      break;
+    case "6":
+      withdraw();
+      break;
+    default:
+      console.log("Enter A number within the range");
+  }
+}
+
+function showSignInMenu() {
+  let choose = prompt(
+    "choose a number [1]Logout, [2]Withdraw money, [3]Deposit money, [4]Take a loan, [5]Invest, [6]Transaction history"
+  );
+
+  chooseASignInProccess(choose);
+}
+
+function startPrograme() {
+  let chooseEnter = prompt(
+    "choose a number [1]sign-in, [2]sign-up, [3]change password, [4]exit"
+  );
+
+  chooseAProccess(chooseEnter);
 }
 
 startPrograme();
