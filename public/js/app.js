@@ -8,7 +8,7 @@ class User {
   }
 }
 
-let user = new User("", "", "0", "", 0);
+let user = new User("", "", "0", "", "");
 
 let database = [];
 
@@ -235,11 +235,29 @@ function changePassword() {
 // ^ sign in proccess
 
 function withdraw() {
-  console.log("withdraw will be here");
+  let withdrawAmount = prompt("Enter Amout to Withdraw");
+  while (withdrawAmount <= 0 || withdrawAmount > user.money) {
+    if (withdrawAmount > user.money) {
+      console.log("Enter an amount less or equals you balance");
+    } else {
+      console.log("Enter a higher amount");
+    }
+  }
+
+  user.money -= withdrawAmount;
 }
 
 function deposit() {
-  console.log("deposit will be here");
+  let depositeAmount = prompt("Enter Amout to Deposite");
+  while (depositeAmount <= 0 || depositeAmount > 1000) {
+    if (depositeAmount > 1000) {
+      console.log("Enter an amount less or equals 1000dh");
+    } else {
+      console.log("Enter a higher amount");
+    }
+  }
+
+  user.money += depositeAmount;
 }
 
 function takeALoan() {
@@ -261,18 +279,23 @@ function chooseASignInProccess(choose) {
       break;
     case "2":
       withdraw();
+      showSignInMenu()
       break;
     case "3":
       deposit();
+      showSignInMenu()
       break;
     case "4":
       takeALoan();
+      showSignInMenu()
       break;
     case "5":
       invest();
+      showSignInMenu()
       break;
     case "6":
-      withdraw();
+      transactionHestory();
+      showSignInMenu()
       break;
     default:
       console.log("Enter A number within the range");
