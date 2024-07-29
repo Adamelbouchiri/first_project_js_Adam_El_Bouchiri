@@ -159,19 +159,20 @@ function passwordCheck(password) {
     return false;
   }
 
+  if (scndPassword.length < 7) {
+    return false;
+  }
+
   let characters = ["@", "#", "-", "+", "*", "/"];
+  console.log(characters.length);
 
   for (let i = 0; i < characters.length; i++) {
     if (scndPassword.includes(characters[i])) {
       return true;
     }
   }
-
-  if (scndPassword.length < 7) {
-    return false;
-  }
-
-  return true;
+  console.log("Must Have Special Character");
+  return false;
 }
 
 function signUp() {
@@ -279,23 +280,23 @@ function chooseASignInProccess(choose) {
       break;
     case "2":
       withdraw();
-      showSignInMenu()
+      showSignInMenu();
       break;
     case "3":
       deposit();
-      showSignInMenu()
+      showSignInMenu();
       break;
     case "4":
       takeALoan();
-      showSignInMenu()
+      showSignInMenu();
       break;
     case "5":
       invest();
-      showSignInMenu()
+      showSignInMenu();
       break;
     case "6":
       transactionHestory();
-      showSignInMenu()
+      showSignInMenu();
       break;
     default:
       console.log("Enter A number within the range");
